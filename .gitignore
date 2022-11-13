@@ -1,0 +1,11 @@
+.metadata/
+*.odp
+*.odt
+*#
+**/bin/
+**/.settings/
+**/.classpath
+**/.project
+**/target/*
+**/*.class
+Servers/
