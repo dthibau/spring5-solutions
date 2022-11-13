@@ -7,6 +7,7 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public class Main {
 
@@ -17,6 +18,8 @@ public class Main {
 		Main.methode2();
 		
 		Main.methode3();
+		
+		Main.methode4();
 	}
 
 	public static void methode1() {
@@ -76,5 +79,17 @@ public class Main {
 			@Override
 			public void onComplete() {System.out.println(elements);	}
 		});
+	}
+	
+	public static void methode4() {
+
+		Mono<Integer> result = Flux.range(1, 10).map(i -> 3 * i)
+												.filter(i -> i % 2 == 0)
+												.flatMap(i -> Flux.just(i, -i))
+												.log()											
+												.reduce(0,(x, y) -> x + y);
+
+		result.subscribe(System.out::println);
+		
 	}
 }
