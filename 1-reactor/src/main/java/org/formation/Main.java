@@ -20,6 +20,8 @@ public class Main {
 		Main.methode3();
 		
 		Main.methode4();
+		
+		Main.methode5();
 	}
 
 	public static void methode1() {
@@ -91,5 +93,10 @@ public class Main {
 
 		result.subscribe(System.out::println);
 		
+	}
+	
+	public static void methode5() {
+		Flux.just(1, 2, 3, 4).map(i -> i * 2).zipWith(Flux.range(0, Integer.MAX_VALUE),
+				(one, two) -> String.format("First Flux: %d, Second Flux: %d", one, two)).log().subscribe();
 	}
 }
