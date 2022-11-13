@@ -15,6 +15,8 @@ public class Main {
 		Main.methode1();
 		
 		Main.methode2();
+		
+		Main.methode3();
 	}
 
 	public static void methode1() {
@@ -36,6 +38,36 @@ public class Main {
 			@Override
 			public void onNext(Integer integer) {
 				elements.add(integer);
+			}
+
+			@Override
+			public void onError(Throwable t) {	System.err.println(t); }
+
+			@Override
+			public void onComplete() {System.out.println(elements);	}
+		});
+	}
+	
+	public static void methode3() {
+		List<Integer> elements = new ArrayList<>();
+
+		Flux.range(1, 10).log().subscribe(new Subscriber<Integer>() {
+			private Subscription s;
+			int index = 0;
+
+			@Override
+			public void onSubscribe(Subscription s) {
+				this.s = s;
+				this.s.request(2);
+			}
+
+			@Override
+			public void onNext(Integer integer) {
+				elements.add(integer);
+				index++;
+				if (index % 2 == 0) {
+					s.request(2);
+				}
 			}
 
 			@Override
