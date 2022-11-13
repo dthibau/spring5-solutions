@@ -1,5 +1,6 @@
 package org.formation;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class Main {
 		Main.methode4();
 		
 		Main.methode5();
+		
+		Main.methode6();
 	}
 
 	public static void methode1() {
@@ -98,5 +101,16 @@ public class Main {
 	public static void methode5() {
 		Flux.just(1, 2, 3, 4).map(i -> i * 2).zipWith(Flux.range(0, Integer.MAX_VALUE),
 				(one, two) -> String.format("First Flux: %d, Second Flux: %d", one, two)).log().subscribe();
+	}
+	
+	public static void methode6() {
+		Flux.range(1,5).delayElements(Duration.ofSeconds(1)).log().subscribe();
+
+		try {
+			Thread.sleep(5500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
