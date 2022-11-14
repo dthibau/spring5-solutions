@@ -39,7 +39,7 @@ public class MainThread {
 	
 	public static Flux<Integer> methode1() {
 
-		return Flux.range(1, 10).log();
+		return Flux.range(1, 10);
 	}
 	
 	public static Flux<String>  methode5() {
