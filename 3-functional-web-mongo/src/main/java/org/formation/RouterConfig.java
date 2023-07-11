@@ -19,12 +19,17 @@ public class RouterConfig {
 	@Bean
 	RouterFunction<ServerResponse> composedRoutes() {
 
-		return RouterFunctions.route(RequestPredicates.GET("/accounts"), accountHandler::listAccounts)
-				.and(RouterFunctions.route(RequestPredicates.GET("/accounts/{id}"), accountHandler::getAccount))
-				.and(RouterFunctions.route(
-						RequestPredicates.POST("/accounts")
-								.and(RequestPredicates.contentType(MediaType.APPLICATION_JSON)),
-						accountHandler::createAccount));
+//		return RouterFunctions.route(RequestPredicates.GET("/accounts"), accountHandler::listAccounts)
+//				.and(RouterFunctions.route(RequestPredicates.GET("/accounts/{id}"), accountHandler::getAccount))
+//				.and(RouterFunctions.route(
+//						RequestPredicates.POST("/accounts")
+//								.and(RequestPredicates.contentType(MediaType.APPLICATION_JSON)),
+//						accountHandler::createAccount));
 
+		return RouterFunctions.route()
+                .GET("/accounts", accountHandler::listAccounts)
+                .GET("/accounts/{id}", accountHandler::getAccount)
+                .POST("/accounts", accountHandler::createAccount)
+                .build();
 	}
 }
