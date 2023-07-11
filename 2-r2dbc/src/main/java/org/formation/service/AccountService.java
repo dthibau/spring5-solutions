@@ -26,6 +26,9 @@ public class AccountService {
 	}
 
 	public Mono<Account> save(Account account) {
+		if ( account.getId() != null ) {
+			return template.update(account);
+		}
 		return template.insert(account);
 	}
 

@@ -11,6 +11,6 @@ public interface AccountRepository  extends ReactiveCrudRepository<Account, Long
 	@Query("SELECT * FROM account WHERE amount = :amount")
 	Flux<Account> findAllByValue(Double amount);
 	
-	@Query("SELECT * FROM account WHERE owner = :owner")
+	@Query("SELECT * FROM account WHERE owner = :owner limit 1")
     Mono<Account> findFirstByOwner(String owner);
 }

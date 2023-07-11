@@ -1,5 +1,7 @@
 package org.formation.service;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.formation.model.Account;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,11 @@ public class AccountServiceTest {
 
 		// fetch all accounts
 		accountService.findAll().as(StepVerifier::create).expectNextCount(2).verifyComplete();
+		
+		StepVerifier.create(accountService.save(new Account("Lucy",14.3))).assertNext(a -> {
+			assertNotNull(a.getId());		
+		})
+		;
 	}
 
 }
