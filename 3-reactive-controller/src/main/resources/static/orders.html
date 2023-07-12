@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Commandes</title>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+</head>
+<body>
+	Hello I'm here
+	<div class="orders"></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+
+
+
+ console.log("Please Log");
+    var source = new EventSource("/stream-sse");
+    source.onmessage = (event) => {
+  		console.log("An event "+event);
+
+		var json = JSON.parse(event.data);
+		console.log("JSON "+JSON.stringify(json));
+		console.log("UPDATING "+$(`#${json.order.id}`));
+    };
+</script>
+</html>
